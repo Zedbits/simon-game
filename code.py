@@ -24,8 +24,9 @@ np = neopixel.NeoPixel(board.NEOPIXEL, num_pixels, brightness=.1, auto_write=Fal
 win = True
 game_seq = []
 player_seq = []
-rand = random.randint(0, 3)
+
 button_stat = False
+count = 0
 
 """
 Function: blink
@@ -42,7 +43,8 @@ def lights(value):
         if value.value == True:
             blink((255, 1, 1), 6, 5)
             np.show()
-        else:
+            time.sleep(1)
+            player_seq.append(1)
             blink((0, 0, 0), 6, 5)
             np.show()
         time.sleep(.05)
@@ -50,7 +52,8 @@ def lights(value):
         if value.value == True:
             blink((1, 255, 1), 9, 8)
             np.show()
-        else:
+            time.sleep(1)
+            player_seq.append(2)
             blink((0, 0, 0), 9, 8)
             np.show()
         time.sleep(.05)
@@ -58,7 +61,8 @@ def lights(value):
         if value.value == True:
             blink((1, 1, 255), 3, 4)
             np.show()
-        else:
+            time.sleep(1)
+            player_seq.append(3)
             blink((0, 0, 0), 3, 4)
             np.show()
         time.sleep(.05)
@@ -66,18 +70,30 @@ def lights(value):
         if value.value == True:
             blink((255, 255, 0), 0, 1)
             np.show()
-        else:
+            time.sleep(1)
+            player_seq.append(4)
             blink((0, 0, 0), 0, 1)
             np.show()
         time.sleep(.05)
+
+def comp_game():
+    rand = random.randint(0, 3)
+    game_seq.append(rand)
+    
+def check(game, player):
+    for thing in game:
+        if thing == player[1]:
+            print("working")
+    
 while True:
     if button_a.value:
         button_stat = not button_stat
-        time.sleep(1)
-    print(button_stat)
+        time.sleep(.5)
+        player_seq = []
     if button_stat:
+        comp_game()
         lights(touch1)
         lights(touch2)
         lights(touch5)
         lights(touch6)
-    
+
