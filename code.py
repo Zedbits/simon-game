@@ -24,9 +24,9 @@ np = neopixel.NeoPixel(board.NEOPIXEL, num_pixels, brightness=.1, auto_write=Fal
 win = True
 game_seq = []
 player_seq = []
-player_touch = False
 button_stat = False
 count = 0
+player_touch = False
 
 """
 Function: blink
@@ -45,9 +45,11 @@ def lights(value):
             np.show()
             time.sleep(1)
             player_seq.append(1)
-            player_touch == True
+            player_touch = True
+            print(player_touch)
             blink((0, 0, 0), 6, 5)
             np.show()
+            print(player_seq)
         time.sleep(.05)
     if value == touch2:
         if value.value == True:
@@ -55,9 +57,11 @@ def lights(value):
             np.show()
             time.sleep(1)
             player_seq.append(0)
-            player_touch == True
+            player_touch = True
+            print(player_touch)
             blink((0, 0, 0), 9, 8)
             np.show()
+            print(player_seq)
         time.sleep(.05)
     if value == touch6:
         if value.value == True:
@@ -65,9 +69,11 @@ def lights(value):
             np.show()
             time.sleep(1)
             player_seq.append(2)
-            player_touch == True
+            player_touch = True
+            print(player_touch)
             blink((0, 0, 0), 3, 4)
             np.show()
+            print(player_seq)
         time.sleep(.05)
     if value == touch5:
         if value.value == True:
@@ -75,9 +81,11 @@ def lights(value):
             np.show()
             time.sleep(1)
             player_seq.append(3)
-            player_touch == True
+            player_touch = True
+            print(player_touch)
             blink((0, 0, 0), 0, 1)
             np.show()
+            print(player_seq)
         time.sleep(.05)
 
 def comp_game():
@@ -102,13 +110,15 @@ while True:
         comp_game()
         print(game_seq)
         print(player_seq)
-        while player_touch == player_touch:
-            lights(touch1)
-            lights(touch2)
-            lights(touch5)
-            lights(touch6)
-            print(player_seq)
-            print(player_touch)
+        while not player_touch:
+            if player_touch == False:
+                lights(touch1)
+                lights(touch2)
+                lights(touch5)
+                lights(touch6)
+            else:
+                player_touch = True
             pass
-        check()
+        print(player_touch)
+
 
