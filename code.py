@@ -100,6 +100,16 @@ def check():
         else:
             button_stat = False
         index += 1
+def game():
+    while not player_touch:
+        lights(touch1)
+        lights(touch2)
+        lights(touch5)
+        lights(touch6)
+        print(player_touch)
+        pass
+    print(player_touch)
+
 
 while True:
     if button_a.value:
@@ -110,15 +120,4 @@ while True:
         comp_game()
         print(game_seq)
         print(player_seq)
-        while not player_touch:
-            if player_touch == False:
-                lights(touch1)
-                lights(touch2)
-                lights(touch5)
-                lights(touch6)
-            else:
-                player_touch = True
-            pass
-        print(player_touch)
-
 
