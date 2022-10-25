@@ -27,6 +27,7 @@ player_seq = []
 button_stat = False
 count = 0
 player_touch = False
+game_stat = False
 
 """
 Function: blink
@@ -110,13 +111,19 @@ def game():
         pass
     print(player_touch)
 
-
+def reset():
+    player_seq = []
+    game_seq = []
+    game_stat == False
+    
+    
 while True:
-    if button_a.value:
-        button_stat = not button_stat
-        time.sleep(.5)
-        player_seq = []
-    if button_stat:
+    if not game_stat:
+        if button_a.value:
+            button_stat = not button_stat
+            time.sleep(.5)
+            game_stat = True
+    else:
         comp_game()
         print(game_seq)
         print(player_seq)
