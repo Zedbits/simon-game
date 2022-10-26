@@ -47,10 +47,8 @@ def lights(value):
             time.sleep(1)
             player_seq.append(1)
             player_touch = True
-            print(player_touch)
             blink((0, 0, 0), 6, 5)
             np.show()
-            print(player_seq)
         time.sleep(.05)
     if value == touch2:
         if value.value == True:
@@ -59,10 +57,8 @@ def lights(value):
             time.sleep(1)
             player_seq.append(0)
             player_touch = True
-            print(player_touch)
             blink((0, 0, 0), 9, 8)
             np.show()
-            print(player_seq)
         time.sleep(.05)
     if value == touch6:
         if value.value == True:
@@ -71,10 +67,8 @@ def lights(value):
             time.sleep(1)
             player_seq.append(2)
             player_touch = True
-            print(player_touch)
             blink((0, 0, 0), 3, 4)
             np.show()
-            print(player_seq)
         time.sleep(.05)
     if value == touch5:
         if value.value == True:
@@ -83,40 +77,66 @@ def lights(value):
             time.sleep(1)
             player_seq.append(3)
             player_touch = True
-            print(player_touch)
             blink((0, 0, 0), 0, 1)
             np.show()
-            print(player_seq)
         time.sleep(.05)
 
-def comp_game():
+def comp():
     rand = random.randint(0, 3)
     game_seq.append(rand)
-
-def check():
-    index = 0
-    for thing in game_seq:
-        if thing == player_seq[index]:
-            print("working")
-        else:
-            button_stat = False
-        index += 1
-def game():
-    while not player_touch:
-        lights(touch1)
-        lights(touch2)
-        lights(touch5)
-        lights(touch6)
-        print(player_touch)
-        pass
-    print(player_touch)
+    for item in game_seq:
+        if item == 0:
+            blink((1, 255, 1), 9, 8)
+            np.show()
+            time.sleep(1)
+            blink((0, 0, 0), 9, 8)
+            np.show()
+            time.sleep(1)
+        if item == 1:
+            blink((255, 1, 1), 6, 5)
+            np.show()
+            time.sleep(1)
+            blink((0, 0, 0), 6, 5)
+            np.show()
+            time.sleep(1)
+        if item == 2:
+            blink((1, 1, 255), 3, 4)
+            np.show()
+            time.sleep(1)
+            blink((0, 0, 0), 3, 4)
+            np.show()
+            time.sleep(1)
+        if item == 3:
+            blink((255, 255, 0), 0, 1)
+            np.show()
+            time.sleep(1)
+            blink((0, 0, 0), 0, 1)
+            np.show()
+            time.sleep(1)
 
 def reset():
     player_seq = []
     game_seq = []
     game_stat == False
-    
-    
+
+def check():
+    if game_seq == player_seq:
+        win = True
+        pass
+    else:
+        for i in range(5):
+            win = False
+            np.fill((255, 0, 0))
+            reset()
+
+def player():
+    while not player_touch:
+        lights(touch1)
+        lights(touch2)
+        lights(touch5)
+        lights(touch6)
+
+
 while True:
     if not game_stat:
         if button_a.value:
@@ -124,7 +144,7 @@ while True:
             time.sleep(.5)
             game_stat = True
     else:
-        comp_game()
-        print(game_seq)
-        print(player_seq)
+        comp()
+        player()
+        print(player_touch)
 
