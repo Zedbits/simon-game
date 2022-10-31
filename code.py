@@ -35,45 +35,70 @@ Return: none
 def blink(color, number1, number2):
     np[number1] = color
     np[number2] = color
-
+    
+def reset():
+    global game_stat, player_val, game_seq
+    np.fill((255, 0, 0))
+    time.sleep(1)
+    np.fill((0, 0, 0))
+    time.sleep(1)
+    player_val = -1
+    game_seq = []
+    game_stat = False
+    print('Game reset')
+    
 def lights():
-    while not touch1.value and not touch2.value and not touch5.value and not touch6.value:
-        pass
-    if touch1.value:
-        blink((255, 1, 1), 6, 5)
-        np.show()
-        time.sleep(1)
-        player_val = 1
-        player_touch = True
-        blink((0, 0, 0), 6, 5)
-        np.show()
-    time.sleep(.05)
-    if touch2.value:
-        blink((1, 255, 1), 9, 8)
-        np.show()
-        time.sleep(1)
-        player_val = 0
-        player_touch = True
-        blink((0, 0, 0), 9, 8)
-        np.show()
-    time.sleep(.05)
-    if touch6.value:
-        blink((1, 1, 255), 3, 4)
-        np.show()
-        time.sleep(1)
-        player_val = 2
-        player_touch = True
-        blink((0, 0, 0), 3, 4)
-        np.show()
-    time.sleep(.05)
-    if touch5.value:
-        blink((255, 255, 0), 0, 1)
-        np.show()
-        time.sleep(1)
-        player_val = 3
-        player_touch = True
-        blink((0, 0, 0), 0, 1)
-        np.show()
+    player_val = -1
+    index = 0
+    for index in range(len(game_seq)):
+        while not touch1.value and not touch2.value and not touch5.value and not touch6.value:
+            pass
+            
+        if touch1.value:
+            blink((255, 1, 1), 6, 5)
+            np.show()
+            time.sleep(1)
+            player_val = 1
+            player_touch = True
+            blink((0, 0, 0), 6, 5)
+            np.show()
+        time.sleep(.05)
+        if touch2.value:
+            blink((1, 255, 1), 9, 8)
+            np.show()
+            time.sleep(1)
+            player_val = 0
+            player_touch = True
+            blink((0, 0, 0), 9, 8)
+            np.show()
+        time.sleep(.05)
+        if touch6.value:
+            blink((1, 1, 255), 3, 4)
+            np.show()
+            time.sleep(1)
+            player_val = 2
+            player_touch = True
+            blink((0, 0, 0), 3, 4)
+            np.show()
+        time.sleep(.05)
+        if touch5.value:
+            blink((255, 255, 0), 0, 1)
+            np.show()
+            time.sleep(1)
+            player_val = 3
+            player_touch = True
+            blink((0, 0, 0), 0, 1)
+            np.show()
+        if game_seq[index] == player_val:
+            index += 1
+            np.fill((0, 255, 0))
+            time.sleep(.5)
+            np.fill((0, 0, 0))
+            print(index)
+        else:
+            reset()
+            print('Breaking')
+            break
     time.sleep(.05)
 
 def comp():
@@ -109,32 +134,13 @@ def comp():
             np.show()
             time.sleep(1)
 
-def reset():
-    player_val = -1
-    game_seq = []
-    game_stat == False
-
-def check():
-    count = 0
-    player_val = -1
-    if game_seq[count] == player_val:
-        count += 1
-        np.fill((0, 255, 0))
-        np.fill((0, 0, 0))
-        print(player_val)
-        print(game_seq[count])
-    else:
-        np.fill((255, 0, 0))
-        np.fill((0, 0, 0))
-        reset()
-
-
-
 def player():
     lights()
 
 
 while True:
+    print("main loop",game_stat)
+    time.sleep(0.05)
     if not game_stat:
         if button_a.value:
             button_stat = not button_stat
@@ -143,5 +149,6 @@ while True:
     else:
         comp()
         player()
-        check()
+        print(game_stat)
+        print(game_seq)
 
