@@ -109,27 +109,23 @@ def player():
         while not touch1.value and not touch2.value and not touch5.value and not touch6.value:
             pass
         if touch1.value:
-            show_pixel((255, 0, 0), 6, 5, .5)
+            show_pixel((255, 0, 0), 6, 5, .32)
             player_val = 1
-            time.sleep(.25)
         if touch2.value:
-            show_pixel((0, 255, 0), 9, 8, .5)
+            show_pixel((0, 255, 0), 9, 8, .32)
             player_val = 0
-            time.sleep(.25)
         if touch6.value:
-            show_pixel((0, 0, 255), 3, 4, .5)
+            show_pixel((0, 0, 255), 3, 4, .32)
             player_val = 2
-            time.sleep(.25)
         if touch5.value:
-            show_pixel((255, 255, 0), 0, 1, .5)
+            show_pixel((255, 255, 0), 0, 1, .32)
             player_val = 3
-            time.sleep(.25)
         if game_seq[index] == player_val:
             index += 1
+            time.sleep(.25)
         else:
             reset()
             break
-    time.sleep(.55)
 
 """
 Function: comp
