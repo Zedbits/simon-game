@@ -50,7 +50,7 @@ def flash_green():
             np.fill((0, 0, 0))
             np.show()
             time.sleep(.05)
-            
+
 """
 Function: flash_red
 Description: This function flashes the color red on every neo pixel on the board.
@@ -65,7 +65,7 @@ def flash_red():
         np.fill((0, 0, 0))
         np.show()
         time.sleep(.05)
-        
+
 """
 Function: show_pixel
 Description: Main code to light up a specific neo pixel a certain color.
@@ -95,7 +95,6 @@ def reset():
     player_val = -1
     game_seq = []
     game_stat = False
-    print('Game reset')
 
 """
 Function: lights
@@ -112,31 +111,25 @@ def player():
         if touch1.value:
             show_pixel((255, 0, 0), 6, 5, .5)
             player_val = 1
-            print(player_val)
-        time.sleep(.10)
+            time.sleep(.25)
         if touch2.value:
             show_pixel((0, 255, 0), 9, 8, .5)
             player_val = 0
-            print(player_val)
-        time.sleep(.10)
+            time.sleep(.25)
         if touch6.value:
             show_pixel((0, 0, 255), 3, 4, .5)
             player_val = 2
-            print(player_val)
-        time.sleep(.10)
+            time.sleep(.25)
         if touch5.value:
             show_pixel((255, 255, 0), 0, 1, .5)
             player_val = 3
-            print(player_val)
-        time.sleep(.10)
+            time.sleep(.25)
         if game_seq[index] == player_val:
             index += 1
-            print(index)
         else:
             reset()
-            print('Breaking')
             break
-    time.sleep(.05)
+    time.sleep(.55)
 
 """
 Function: comp
@@ -169,6 +162,3 @@ while True:
     else:
         comp()
         player()
-        print(game_stat)
-        print(game_seq)
-
